@@ -13,11 +13,26 @@ class UserModel extends Database{
 	{	
 		$sql = "INSERT INTO users (username, password, full_name)
 							VALUES ('$username', '$password', '$fullName')";
-		$this->db->conn->query($sql);
+						//echo $sql;
+						//	echo "<script>alert($sql)</script>";
+		//$this->db->conn->query($sql);
+		if ($this->db->conn->query($sql) === TRUE) {
+			echo "New record created successfully";
+		  } else {
+			echo "Error: " . $sql . "<br>" . $this->db->$conn->error;
+		  }
 	}
 
 	public function checkExists($username) {
 		$sql = "SELECT * FROM users WHERE username = '$username'";
+		$result = $this->db->conn->query($sql);
+		
+		return $result;
+	}
+
+	public function login($username, $password)
+	{
+		$sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
 		$result = $this->db->conn->query($sql);
 		
 		return $result;

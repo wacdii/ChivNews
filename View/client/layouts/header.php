@@ -181,17 +181,36 @@
                                                     </button>
                                                 </form>
                                             </li>
-                                            <li>
-                                                <button type="button" class="login-btn" data-toggle="modal" data-target="#signup">
-                                                    <i class="fa fa-user" aria-hidden="true"></i>Sign up
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <button type="button" class="login-btn" data-toggle="modal" data-target="#myModal">
-                                                    <i class="fa fa-user" aria-hidden="true"></i>Sign in
-                                                </button>
-                                            </li>
-
+                                            <?php
+                                                if (!empty($_SESSION['user'])) {?>
+                                                    <li>
+                                                        <button type="button" class="login-btn">
+                                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                                            <?=$_SESSION['user']['username']?>
+                                                        </button>
+                                                    </li>
+                                                    <li>
+                                                        <button type="button" class="login-btn">
+                                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                                            <a href="?controller=logout" style="color: #fff">
+                                                                Logout
+                                                            </a>
+                                                        </button>
+                                                    </li>
+                                                <?php } else {?>
+                                                    <li>
+                                                        <button type="button" class="login-btn" data-toggle="modal" data-target="#signup">
+                                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                                            Signup
+                                                        </button>
+                                                    </li>
+                                                    <li>
+                                                        <button type="button" class="login-btn" data-toggle="modal" data-target="#myModal">
+                                                            <i class="fa fa-user" aria-hidden="true"></i>Login
+                                                        </button>
+                                                    </li>
+                                                <?php }
+                                            ?>
                                             <li>
                                                 <div id="side-menu-trigger" class="offcanvas-menu-btn">
                                                     <a href="#" class="menu-bar">
@@ -266,7 +285,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="login-form">
-                                <form>
+                                <form method="post">
                                     <label>Tên đăng nhập *</label>
                                     <input name="username" type="text" placeholder="Tên đăng nhập" />
                                     <label>Mật khẩu *</label>
@@ -275,7 +294,7 @@
                                         <input id="checkbox" type="checkbox" checked>
                                         <label for="checkbox">Nhớ mật khẩu</label>
                                     </div>
-                                    <button type="submit" value="Login">Đăng nhập</button>
+                                    <button type="submit" name="login" value="Login">Đăng nhập</button>
                                     <button class="form-cancel" type="submit" value="">Hủy</button>
                                     <label class="lost-password">
                                         <a href="#">Quên mật khẩu?</a>
@@ -293,7 +312,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <div class="title-login-form">Đăng ký</div>
+                            <div class="title-login-form">Đăng ký </div>
                         </div>
                         <div class="modal-body">
                             <div class="login-form">
